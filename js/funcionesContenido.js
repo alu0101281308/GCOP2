@@ -74,7 +74,7 @@ const borrarMatrices = (() => {
 const crearMatrices = (() => {
     output.innerHTML = `
     <hr>
-    <h2>Matricesx por documento</h2>
+    <h2>Matrices por documento</h2>
     <div class="mb-3 mt-3 container" id="matriz-output">
     </div>
     <h2>Similaridad coseno</h2>
