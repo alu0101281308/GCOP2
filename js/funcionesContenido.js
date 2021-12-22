@@ -36,6 +36,8 @@ const cargarDocumentos = (() => {
 })
 
 const calcularMatriz = (() => {
+    documentos = [];
+    diccionarioGlobal = {};
     cargarDocumentos();
     borrarMatrices();
     crearMatrices();
