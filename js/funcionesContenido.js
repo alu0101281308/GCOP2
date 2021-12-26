@@ -12,6 +12,7 @@ const limpiarTermino = ((termino) => {
 const extraerTerminos = ((documento, index) => {
     let terminos = documento.split(" ");
     let diccionario = {};
+    let contDoc = 0
 
     // Quito signos y filtro por stopwords
     terminos = terminos.map((termino) => limpiarTermino(termino))
@@ -21,7 +22,7 @@ const extraerTerminos = ((documento, index) => {
 
     // Cuentos las repeticiones de los teminos en el doc y el total de terminos en el doc
     terminos.forEach(termino => termino in diccionario ? diccionario[termino]++ : diccionario[termino] = 1);
-    terminos.forEach(termino => termino in diccionarioGlobal ? diccionarioGlobal[termino]++ : diccionarioGlobal[termino] = 1);
+    terminos.forEach((termino) => termino in diccionarioGlobal ? index in diccionarioGlobal[termino] ? diccionarioGlobal[termino] : diccionarioGlobal[termino] = [...diccionarioGlobal[termino], index] : diccionarioGlobal[termino] = [index]);
 
     // Guardo esta informacion reutilizando la variable documentos
     const inf = { terminos: diccionario, cont: terminos.length }
@@ -39,6 +40,8 @@ const calcularMatriz = (() => {
     documentos = [];
     diccionarioGlobal = {};
     cargarDocumentos();
+    console.log(documentos)
+    console.log(diccionarioGlobal)
     borrarMatrices();
     crearMatrices();
 });
@@ -48,7 +51,7 @@ const calcularTF = ((termino, indexDocumento) => {
 });
 
 const calcularIDF = ((termino) => {
-    return Math.log(documentos.length / diccionarioGlobal[termino]);
+    return Math.log(documentos.length / diccionarioGlobal[termino].length);
 });
 
 const productoArrays = ((a1, a2) => {
